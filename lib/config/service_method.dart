@@ -9,9 +9,10 @@ Future getHomePageContext() async{
     print("开始请求首页数据");
     Response response;
     Dio dio=new Dio();
-    dio.options.contentType=ContentType.parse("application/x-www-form-urlencoded") as String;
-    var formData={'lon':'115.02932','lat':'35.76189'};
-    response = await dio.post(servicePath["homePageContext"],data: formData);
+    // dio.options.contentType=ContentType.parse("application/x-www-form-urlencoded") as String;
+    // var formData={'lon':'115.02932','lat':'35.76189'};
+    response = await dio.get(servicePath["homePageContext"]);
+    print(response);
     if(response.statusCode==200){ //成功
       return response.data;
     }else{

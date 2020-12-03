@@ -1,25 +1,41 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:shop_demo/config/service_method.dart';
+import 'package:shop_demo/widget/swiperdiy_widget.dart';
+
+class HomePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    getHttp();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Brook首页"),
-      ),
-      body: Text("Brook首页"),
-    );
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    super.initState();
   }
 
-  void getHttp() async{
-    try{
-      Response response;
-      response=await Dio().get("https://www.easy-mock.com/mock/5c60131a4bed3a6342711498/baixing/dabaojian?name=大胸美女");
-      return print(response);
-    }catch(e){
-      return print(e);
-    }
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: getHomePageContext(),
+        builder:(context,snapshot){
+          // print("data============> ${snapshot.data.toString()}");
+          if(snapshot.hasData){
+            // var data=json.decode(snapshot.data.toString());
+
+            List<Map> swiperDataList = (snapshot.data['data']['slide'] as List).cast(); // 顶部轮播组件数
+            return Column(
+              children: <Widget>[
+                SwiperDiy(swiperDataList:swiperDataList)
+              ],
+            );
+          }else{
+            return Center(
+              child: Text('加载中'),
+            );
+          }
+        }
+    );
   }
 }

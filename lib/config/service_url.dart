@@ -1,5 +1,7 @@
 
-const serviceUrl="";
+const serviceUrl="http://api.dtmcw.cn/";
+
+
 const servicePath={
-  'homePageContext':serviceUrl+"/wxmini/homePageContent", // 商家首页信息
+  'homePageContext':serviceUrl+"/home/index/index", // 商家首页信息
 };
