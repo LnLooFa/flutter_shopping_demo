@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ItemGridView extends StatelessWidget {
@@ -15,14 +13,14 @@ class ItemGridView extends StatelessWidget {
       },
       child: Column(
         children: <Widget>[
-          Image.network(item["h5_icon"]),
+          Image.network(item["h5_icon"],width: 50,),
           Text(
             item["title"],
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             textAlign: TextAlign.left, // 对齐方式
             style: TextStyle(
-                fontSize: 10.0
+                fontSize: 14
             ),
           )
         ],
@@ -33,7 +31,7 @@ class ItemGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
+      height:180,
       child: GridView.count(
         crossAxisCount: 5,
         children: gridViewList.map((item){
