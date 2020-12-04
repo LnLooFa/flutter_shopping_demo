@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shop_demo/config/service_method.dart';
+import 'package:shop_demo/widget/item_gridview_widget.dart';
 import 'package:shop_demo/widget/swiperdiy_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,16 +19,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: getHomePageContext(),
+        future: getHomeData(),
         builder:(context,snapshot){
-          // print("data============> ${snapshot.data.toString()}");
           if(snapshot.hasData){
-            // var data=json.decode(snapshot.data.toString());
-
-            List<Map> swiperDataList = (snapshot.data['data']['slide'] as List).cast(); // 顶部轮播组件数
+            List<Map> swiperDataList = (snapshot.data[0]['data']['slide'] as List).cast(); // 顶部轮播组件数
+            List<Map> itemGrid = (snapshot.data[1]['data'] as List).cast(); // 顶部轮播组件数
             return Column(
               children: <Widget>[
-                SwiperDiy(swiperDataList:swiperDataList)
+                SwiperDiy(swiperDataList:swiperDataList),
+                ItemGridView(gridViewList:itemGrid)
               ],
             );
           }else{
